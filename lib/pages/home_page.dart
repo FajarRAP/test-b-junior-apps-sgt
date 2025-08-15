@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_b_junior_apps_sgt/model/product.dart';
 
 import '../constants.dart';
 import '../widgets/base_card.dart';
@@ -14,8 +15,35 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var _selectedFilter = 0;
+  final List<Product> _products = List.from(products);
 
-  void selectFilter(int index) => setState(() => _selectedFilter = index);
+  void selectFilter(int index) {
+    switch (index) {
+      case 0:
+        _products
+          ..clear()
+          ..addAll(products);
+        break;
+      case 1:
+        _products
+          ..clear()
+          ..addAll(products.where((product) => product.category == 'Dress'));
+        break;
+      case 2:
+        _products
+          ..clear()
+          ..addAll(products.where((product) => product.category == 'T-Shirt'));
+        break;
+      case 3:
+        _products
+          ..clear()
+          ..addAll(products.where((product) => product.category == 'Jeans'));
+
+        break;
+    }
+
+    setState(() => _selectedFilter = index);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +52,7 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.all(24),
           children: <Widget>[
+            // Profile
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -46,10 +75,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                CircleAvatar(),
+                CircleAvatar(
+                  foregroundImage: AssetImage(avatarPath),
+                ),
               ],
             ),
             const SizedBox(height: 16),
+            // Search Bar
             Row(
               children: <Widget>[
                 Expanded(
@@ -89,6 +121,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             const SizedBox(height: 32),
+            // Filter
             SizedBox(
               height: 40,
               child: ListView(
@@ -133,7 +166,19 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 24),
+            // Content
+            if (_products.isEmpty)
+              Center(
+                child: const Text('No products available'),
+              ),
             GridView.builder(
+              itemBuilder: (context, index) {
+                return GridTileItem(
+                  onTap: () => setState(() =>
+                      _products[index].isLiked = !_products[index].isLiked),
+                  product: _products[index],
+                );
+              },
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 childAspectRatio: 1 / 2.3,
                 crossAxisCount: 2,
@@ -142,12 +187,7 @@ class _HomePageState extends State<HomePage> {
               ),
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: products.length,
-              itemBuilder: (context, index) => GridTileItem(
-                onTap: () => setState(
-                    () => products[index].isLiked = !products[index].isLiked),
-                product: products[index],
-              ),
+              itemCount: _products.length,
             ),
           ],
         ),
