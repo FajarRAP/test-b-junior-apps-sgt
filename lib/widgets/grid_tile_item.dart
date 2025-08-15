@@ -21,12 +21,9 @@ class GridTileItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.red,
-                ),
-                height: 200,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(product.url),
               ),
               const SizedBox(height: 8),
               Text(
