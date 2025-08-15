@@ -1,16 +1,35 @@
-# test_b_junior_apps_sgt
+# Test A Junior Apps SGT
 
-A new Flutter project.
+Technical Test B Junior Apps PT Summit Global Teknologi
+
+## Features
+
+- UI Slicing
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/FajarRAP/test-b-junior-apps-sgt.git
+   ```
+2. **Navigate to the project directory:**
+   ```bash
+   cd test-b-junior-apps-sgt
+   ```
+3. **Install dependencies:**
+   ```bash
+   flutter pub get
+   ```
+4. **Run the app:**
+   ```bash
+   flutter run
+   ```
 
-A few resources to get you started if this is your first Flutter project:
+## Requirements
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter SDK
+- Dart SDK
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## License
+
+This project is licensed under the MIT License.
